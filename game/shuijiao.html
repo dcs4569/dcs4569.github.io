@@ -20,9 +20,9 @@
 <body style="overflow: hidden;">
 <a href="javascript:void(0);" onclick="reStart()" style="position: absolute;top:10px;right:10px;">重置</a>
 <div id="div" style="position: relative;border:1px solid red;">
-    <img id="shuijiao" src="${rc.contextPath}/static/image/wan.png" style="transform: rotate(180deg);z-index: 9999;">
+    <img id="shuijiao" src="../images/wan.png" style="transform: rotate(180deg);z-index: 9999;">
     <div id="line" style="position: absolute;top:50%;height: 5px;background: red;width: 100%;border-radius: 5px;"></div>
-    <img id="tangyuan" src="${rc.contextPath}/static/image/wan.png" style="bottom:0;">
+    <img id="tangyuan" src="../images/wan.png" style="bottom:0;">
 </div>
 <script>
     //水饺子弹集合
@@ -57,7 +57,7 @@
         var img = document.createElement('img');
         let id = 't' + new Date().getTime();
         img.id=id;
-        img.src = '${rc.contextPath}/static/image/shuijiao.png';
+        img.src = '../images/shuijiao.png';
         img.style.position = 'absolute';
         img.style.width = '20px';
         img.style.height = '20px';
@@ -87,7 +87,7 @@
         var img = document.createElement('img');
         let id = 't' + new Date().getTime();
         img.id=id;
-        img.src = '${rc.contextPath}/static/image/tangyuan.png';
+        img.src = '../images/tangyuan.png';
         img.style.position = 'absolute';
         img.style.width = '20px';
         img.style.height = '20px';
