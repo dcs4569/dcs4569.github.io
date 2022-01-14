@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+        img{
+            width:50px;
+            position: absolute;
+            left:calc(50% - 25px);
+        }
+    </style>
+</head>
+<body style="overflow: hidden;">
+<a href="javascript:void(0);" onclick="reStart()" style="position: absolute;top:10px;right:10px;">重置</a>
+<div id="div" style="position: relative;border:1px solid red;">
+    <img id="shuijiao" src="${rc.contextPath}/static/image/wan.png" style="transform: rotate(180deg);z-index: 9999;">
+    <div id="line" style="position: absolute;top:50%;height: 5px;background: red;width: 100%;border-radius: 5px;"></div>
+    <img id="tangyuan" src="${rc.contextPath}/static/image/wan.png" style="bottom:0;">
+</div>
+<script>
+    //水饺子弹集合
+    var sArr = [];
+    //汤圆子弹集合
+    var tArr = [];
+    //子弹旋转角度
+    var deg = 1440;
+    //动画只需时间
+    var timer = 500;
+    //对战墙移动距离
+    var up = 0;
+    //出使化游戏平台宽高
+    var gameHeight = window.screen.height - 200;
+    var gameWidth = window.screen.width-100;
+    var num = parseInt(gameWidth / 20);
+    var div = document.getElementById('div');
+    var line = document.getElementById('line');
+    var shuijiao = document.getElementById('shuijiao');
+    var tangyuan = document.getElementById('tangyuan');
+    div.style.height = gameHeight + 'px';
+    div.style.width = gameWidth + 'px';
+    div.style.margin = '50px auto';
+    line.style.top = gameHeight/2 + "px";
+    shuijiao.addEventListener("touchstart",function(e){
+        sendShuijiao();
+    });
+    tangyuan.addEventListener("touchstart",function(e){
+        sendTangyuan();
+    });
+    function sendShuijiao(){
+        var img = document.createElement('img');
+        let id = 't' + new Date().getTime();
+        img.id=id;
+        img.src = '${rc.contextPath}/static/image/shuijiao.png';
+        img.style.position = 'absolute';
+        img.style.width = '20px';
+        img.style.height = '20px';
+        img.style.top = '20px';
+        img.style.left = gameWidth/2 -10 +'px';
+        img.style.transform = 'rotate(180deg)';
+        div.append(img);
+        $('#' + id).animate(
+            {top:new Number(line.style.top.replace('px','')) - 10 - 10 * up + 'px'}, //180 指旋转度数
+            {
+                step: function(now,fix){
+                    $(this).css('-webkit-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-ms-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-moz-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-o-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-transform','rotate('+now*deg/timer+'deg)');
+                },
+                durantion:timer
+            },'linear')
+        setTimeout(function(){
+            sArr.push(img)
+        },timer)
+    }
+
+
+    function sendTangyuan(){
+        var img = document.createElement('img');
+        let id = 't' + new Date().getTime();
+        img.id=id;
+        img.src = '${rc.contextPath}/static/image/tangyuan.png';
+        img.style.position = 'absolute';
+        img.style.width = '20px';
+        img.style.height = '20px';
+        img.style.bottom = '20px';
+        img.style.left = gameWidth/2 -10 + 'px';
+        div.append(img);
+        $('#' + id).animate(
+            {bottom:gameHeight - new Number(line.style.top.replace('px','')) - 20 + 10 * up + 'px'}, //180 指旋转度数
+            {
+                step: function(now,fix){
+                    $(this).css('-webkit-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-ms-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-moz-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-o-transform','rotate('+now*deg/timer+'deg)');
+                    $(this).css('-transform','rotate('+now*deg/timer+'deg)');
+                },
+                durantion:timer
+            },'linear')
+        setTimeout(function(){
+            tArr.push(img)
+        },timer)
+
+    }
+
+    var task = setInterval(function(){
+        for (var i = 0; i < tArr.length; i++) {
+            $(tArr[i]).css({bottom:gameHeight - new Number(line.style.top.replace('px','')) - parseInt(i / num) * 10 - 16 + 'px',left:calcLeft(i) + 'px'});
+        }
+        for (var i = 0; i < sArr.length; i++) {
+            $(sArr[i]).css({
+                top: new Number(line.style.top.replace('px','')) - parseInt(i / num) * 10 - 16 + 'px',
+                left: calcLeft(i) + 'px'
+            });
+        }
+        var sl = sArr.length;
+        var tl = tArr.length;
+        up =( tl - sl)/10;
+        var tempArr = tArr;
+        if(up > 0){
+            tempArr = sArr;
+        }
+        var len = 0;
+        if(tempArr.length > 10 ){
+            len = tempArr.length-10;
+        }
+        for (var i = 0; i < len; i++) {
+            $(sArr.pop()).remove();
+            $(tArr.pop()).remove();
+        }
+        if(new Number(line.style.top.replace('px','')) <= 40){
+            alert("汤圆胜利了")
+            clearInterval(task)
+        }else if(new Number(line.style.top.replace('px','')) >= gameHeight - 50){
+            alert("水饺胜利了")
+            clearInterval(task)
+        }
+        $(line).css({top:new Number(line.style.top.replace('px','')) - up + 'px'});
+    },16);
+
+    function calcLeft(i){
+        var index = i % num;
+        if(index % 2 === 0){
+            return gameWidth/2 - parseInt(index / 2) * 20 + Math.random() * 5
+        }else{
+            return gameWidth/2 + parseInt(index / 2) * 20 + Math.random() * 5
+        }
+    }
+
+    function reStart(){
+        window.location.reload();
+    }
+</script>
+
+</body>
+</html>
