@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <title>打年兽</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+        }
+        .main{
+            width:400px;height:400px;
+            margin:0px auto;
+            perspective-origin: 50% 200px;
+            perspective: 2000px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+        .main .ground{
+            width:100%;height:100%;
+            transform: rotateY(30deg) rotateX(60deg);
+            background: rgb(7, 255, 138);
+            position: relative;
+            perspective-origin: 50% 100px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+        .main .ground > div{
+            position: absolute;
+            background: #fff;
+        }
+        :root{
+            --box-val:50px;
+            --box-val-harf:25px;
+        }
+        .main .ground > .body{
+            top:0px;
+            left:35px;
+            background: rgb(243, 253, 255);
+            height: 80px;
+            width: 80px;
+        }
+        .main .ground > .front{
+            width: 30px;
+            transform: translateZ(40px);
+        }
+        .main .ground > .left{
+            width:30px;
+            transform: translateZ(40px) rotateY(90deg);
+            transform-origin: left center;
+        }
+
+        .main .ground > .back{
+            width: 30px;
+            transform: translateZ(10px) rotateY(180deg);
+         }
+
+        .main .ground > .right{
+            width: 30px;
+            transform:translateZ(40px)   rotateY(-90deg);
+            transform-origin: right;
+        }
+
+        .main .ground > .top{
+            height: 30px;
+            width: 30px;
+            transform: translateZ(40px) rotateX(-90deg);
+            transform-origin: top center;
+        }
+
+        .main .ground > .bottom{
+            height: 30px;
+            width: 30px;
+            top:50px;
+            transform: translateZ(40px) rotateX(90deg);
+            transform-origin: bottom center;
+        }
+
+        .main .ground > .head{
+            top:60px;
+            left:30px;
+            background: rgb(255,187,166);
+            height: 40px;
+            width: 40px;
+        }
+
+        .main .ground > .head-front{
+            transform: translateZ(80px);
+        }
+        .main .ground > .head-left{
+            transform: translateZ(80px) rotateY(90deg);
+            transform-origin: left center;
+        }
+
+        .main .ground > .head-back{
+            transform: translateZ(41px) rotateY(180deg);
+        }
+
+        .main .ground > .head-right{
+            transform:translateZ(80px)   rotateY(-90deg);
+            transform-origin: right;
+        }
+
+        .main .ground > .head-top{
+            transform: translateZ(80px) rotateX(-90deg);
+            transform-origin: top center;
+        }
+
+        .main .ground > .head-bottom{
+            left:27px;
+            transform: translateZ(65px) rotateX(-90deg);
+            transform-origin: bottom center;
+        }
+
+        .main .ground > .foot1{
+            top:0px;
+            left:35px;
+            background: rgb(0, 0, 0);
+            height: 10px;
+            width: 10px;
+        }
+
+        .main .ground > .foot2{
+            top:0px;
+            left:55px;
+            background: rgb(0, 0, 0);
+            height: 10px;
+            width: 10px;
+        }
+
+        .main .ground > .foot3{
+            top:75px;
+            left:35px;
+            background: rgb(0, 0, 0);
+            height: 10px;
+            width: 10px;
+        }
+
+        .main .ground > .foot4{
+            top:75px;
+            left:55px;
+            background: rgb(0, 0, 0);
+            height: 10px;
+            width: 10px;
+        }
+
+        .main .ground > .foot-front{
+            transform: translateZ(10px);
+        }
+        .main .ground > .foot-left{
+            transform: translateZ(10px) rotateY(90deg);
+            transform-origin: left center;
+        }
+
+        .main .ground > .foot-back{
+            transform: translateZ(0px) rotateY(180deg);
+        }
+
+        .main .ground > .foot-right{
+            transform:translateZ(10px)   rotateY(-90deg);
+            transform-origin: right;
+        }
+
+        .main .ground > .foot-top{
+            transform: translateZ(10px) rotateX(-90deg);
+            transform-origin: top center;
+        }
+
+        .main .ground > .foot-bottom{
+            transform: translateZ(10px) rotateX(90deg);
+            transform-origin: bottom center;
+        }
+
+
+        .hit{
+            animation: hit ease 0.3s;
+        }
+        @keyframes hit {
+            0%{
+                transform: rotate(0deg) ;
+            }
+            80%{
+                transform: rotate(30deg) translateX(50px) translateY(-100px);
+            }
+            100%{
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body style="background: #61D0E1;overflow: hidden;">
+<div class="main">
+    <div class="ground">
+        <div class="nian body front"></div>
+        <div class="nian body left"></div>
+        <div class="nian body back"></div>
+        <div class="nian body right"></div>
+        <div class="nian body top"></div>
+        <div class="nian body bottom"></div>
+
+        <div class="nian head head-front"></div>
+        <div class="nian head head-left"></div>
+        <div class="nian head head-back"></div>
+        <div class="nian head head-right"></div>
+        <div class="nian head head-top"></div>
+        <div class="nian head head-bottom" style="background: url('${rc.contextPath}/static/image/nianshou.png');">
+        </div>
+
+        <div class="nian foot1 foot-front"></div>
+        <div class="nian foot1 foot-left"></div>
+        <div class="nian foot1 foot-back"></div>
+        <div class="nian foot1 foot-right"></div>
+        <div class="nian foot1 foot-top"></div>
+        <div class="nian foot1 foot-bottom"></div>
+
+        <div class="nian foot2 foot-front"></div>
+        <div class="nian foot2 foot-left"></div>
+        <div class="nian foot2 foot-back"></div>
+        <div class="nian foot2 foot-right"></div>
+        <div class="nian foot2 foot-top"></div>
+        <div class="nian foot2 foot-bottom"></div>
+
+        <div class="nian foot3 foot-front"></div>
+        <div class="nian foot3 foot-left"></div>
+        <div class="nian foot3 foot-back"></div>
+        <div class="nian foot3 foot-right"></div>
+        <div class="nian foot3 foot-top"></div>
+        <div class="nian foot3 foot-bottom"></div>
+
+        <div class="nian foot4 foot-front"></div>
+        <div class="nian foot4 foot-left"></div>
+        <div class="nian foot4 foot-back"></div>
+        <div class="nian foot4 foot-right"></div>
+        <div class="nian foot4 foot-top"></div>
+        <div class="nian foot4 foot-bottom"></div>
+    </div>
+</div>
+<img id="chui" src="${rc.contextPath}/static/image/chuizi.png" width="50" style="position: absolute;">
+<div class="msg">速度加快了</div>
+<style>
+    .msg{
+        display: none;
+        width:300px;
+        height:50px;
+        line-height: 50px;
+        text-align: center;
+        color: #CC2222;
+        position: absolute;
+        right: 10px;
+        top:10px;
+        background: rgba(255,255,255,.8);
+        border-radius: 5px;
+    }
+    .msg:after{
+        content: ' ';
+        clear: both;
+    }
+    ul{
+        display: block;
+        position: absolute;
+        top:10px;
+        left:10px;
+        width: 200px;
+        background: rgba(255,255,255,.3);
+    }
+    li{
+        display: block;
+        list-style: none;
+        width:100px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        color: #fff;
+        background: rgba(255,0,0,.7);
+        border-radius: 2px;
+        margin:10px auto;
+        cursor: pointer;
+    }
+    li:hover{
+        background: rgba(255,0,0,1);
+        transform: scale(1.1);
+    }
+</style>
+<ul class="hover">
+    <li onclick="reStart()">开始</li>
+</ul>
+<script type="text/javascript">
+    var hiting = false;
+    var hiding = false;
+    var timer = 800;
+    var sucTimes = 0;
+    var failTimes = 0;
+    var click = false;
+    var sp ={}
+    var deg = {x:60,y:30}
+    var start = true
+    var transVal = {
+        front:{
+            translateZ:{val:40,un:'px'}
+        },
+        left:{
+            translateZ:{val:40,un:'px'},
+            rotateY:{val:90,un:'deg'}
+        },
+        right:{
+            translateZ:{val:40,un:'px'},
+            rotateY:{val:-90,un:'deg'}
+        },
+        back:{
+            translateZ:{val:10,un:'px'},
+            rotateY:{val:180,un:'deg'}
+        },
+        top:{
+            translateZ:{val:40,un:'px'},
+            rotateX:{val:-90,un:'deg'}
+        },
+        bottom:{
+            translateZ:{val:40,un:'px'},
+            rotateX:{val:90,un:'deg'}
+        },
+        'head-front':{
+            translateZ:{val:80,un:'px'}
+        },
+        'head-left':{
+            translateZ:{val:80,un:'px'},
+            rotateY:{val:90,un:'deg'}
+        },
+        'head-right':{
+            translateZ:{val:80,un:'px'},
+            rotateY:{val:-90,un:'deg'}
+        },
+        'head-back':{
+            translateZ:{val:41,un:'px'},
+            rotateY:{val:180,un:'deg'}
+        },
+        'head-top':{
+            translateZ:{val:80,un:'px'},
+            rotateX:{val:-90,un:'deg'}
+        },
+        'head-bottom':{
+            translateZ:{val:65,un:'px'},
+            rotateX:{val:-90,un:'deg'}
+        },
+        'foot-front':{
+            translateZ:{val:10,un:'px'}
+        },
+        'foot-left':{
+            translateZ:{val:10,un:'px'},
+            rotateY:{val:90,un:'deg'}
+        },
+        'foot-right':{
+            translateZ:{val:10,un:'px'},
+            rotateY:{val:-90,un:'deg'}
+        },
+        'foot-back':{
+            translateZ:{val:0,un:'px'},
+            rotateY:{val:180,un:'deg'}
+        },
+        'foot-top':{
+            translateZ:{val:10,un:'px'},
+            rotateX:{val:-90,un:'deg'}
+        },
+        'foot-bottom':{
+            translateZ:{val:10,un:'px'},
+            rotateX:{val:90,un:'deg'}
+        }
+    }
+    $(function(){
+        $('.nian').hide()
+        var topVal = 100;
+        for (var i = 0; i < 4; i++) {
+            var div = document.createElement("div");
+            div.style.top = topVal + "px";
+            div.style.left = "0px";
+            div.style.width = '100%';
+            div.style.height = '2px';
+            $('.ground').append(div)
+            topVal += 100;
+        }
+
+        var leftVal = 100;
+        for (var i = 0; i < 4; i++) {
+            var div = document.createElement("div");
+            div.style.left = leftVal + "px";
+            div.style.top = "0px";
+            div.style.width = '2px';
+            div.style.height = '100%';
+            $('.ground').append(div)
+            leftVal += 100;
+        }
+
+        $('.ground')[0].addEventListener('click',function(e){
+            $('#chui').addClass("hit");
+            hiting = true
+            setTimeout(function(){
+                hiting = false
+                $('#chui').removeClass("hit");
+            },300)
+        })
+
+        document.addEventListener("mousedown",function(e){
+            click = true;
+            sp = {x:e.clientX,y:e.clientY}
+        });
+
+        document.addEventListener("mousemove",function(e){
+            if(!click){
+                return;
+            }
+            var ydeg = (deg.y + (e.clientX - sp.x)/10);
+            var xdeg = (deg.x - (e.clientY - sp.y)/10);
+            $('.ground').css({transform:'rotateY('+ydeg+'deg) rotateX('+xdeg+'deg)'})
+            deg = {x:xdeg,y:ydeg};
+            sp = {x:e.clientX,y:e.clientY}
+        });
+
+        document.addEventListener("mouseup",function(e){
+            click = false;
+        })
+
+        $('.main')[0].addEventListener('mousemove',function(e){
+            if(!hiting){
+                $('#chui').css({left:e.clientX-5+'px',top:e.clientY - 55+'px'})
+            }
+        })
+
+        $('.nian').on('click',clickFun);
+    })
+
+    function dealAfterFail(){
+        failTimes ++
+        if(failTimes == 3){
+            showMsg('GAME OVER，成功打到'+sucTimes+'只年兽');
+            start = false
+        }
+    }
+
+    function deadNianshou(){
+        $('.nian').animate({opacity:0},{
+            step:function(now,fix){
+                $(this).css({transform:'translateZ('+now * 40+'px)'})
+            },
+            duration:timer
+        },'linear');
+    }
+
+    function hideNianshou(){
+        $('.nian').animate({opacity:0},{
+            step:function(now,fix){
+                var obj = transVal[$(this).attr('class').split(' ')[2]]
+                if(obj){
+                    var s = ' '
+                    for (var v in obj){
+                        if(v.indexOf('translate') >= 0){
+                            s += v + '('+ (obj[v].val - 80  + now * 80) + obj[v].un +') '
+                        }else{
+                            s += v + '('+obj[v].val+ obj[v].un +') '
+                        }
+                    }
+                    $(this).css({transform:s})
+                }
+            },
+            duration:timer
+        },'linear');
+    }
+
+    function showMsg(msg){
+        $('.msg').html(msg);
+        $('.msg').show();
+        setTimeout(function(){$('.msg').hide();},2000)
+    }
+
+    function clickFun(e,auto){
+        if(e){
+            e.stopPropagation();
+        }
+        if(hiding){
+            return;
+        }
+        hiding = true
+        if(auto){
+            hideNianshou()
+            setTimeout(function(){
+                dealAfterFail();
+                showNianshou()
+            },timer)
+        }else{
+            $('#chui').addClass("hit");
+            hiting = true
+            setTimeout(function(){
+                hiting = false
+                $('#chui').removeClass("hit");
+                sucTimes ++
+                if(sucTimes%5==0){
+                    showMsg('速度加快了')
+                    timer -= 100
+                }
+                if(timer < 400){
+                    timer = 400
+                }
+                deadNianshou();
+                setTimeout(function(){
+                    showMsg('成功打到'+sucTimes +'只年兽')
+                    showNianshou()
+                },timer)
+            },300)
+        }
+    }
+
+    function showNianshou() {
+        $('.nian').show()
+        if(!start){
+            return;
+        }
+        var topNum = parseInt(Math.random()*4)
+        var leftNum = parseInt(Math.random()*4)
+        $('.body').css({top:topNum*100+'px',left:leftNum*100 + 35 +'px'})
+        $('.head').css({top:topNum*100+ 60 +'px',left:leftNum*100 + 30 +'px'})
+        $('.head-bottom').css({top:topNum*100+ 60 +'px',left:leftNum*100 + 27 +'px'})
+        $('.foot1').css({top:topNum*100 +'px',left:leftNum*100 + 35 +'px'})
+        $('.foot2').css({top:topNum*100 +'px',left:leftNum*100 + 55 +'px'})
+        $('.foot3').css({top:topNum*100+ 75 +'px',left:leftNum*100 + 35 +'px'})
+        $('.foot4').css({top:topNum*100+ 75 +'px',left:leftNum*100 + 55 +'px'})
+        $('.nian').animate({opacity:1},{
+            step:function(now,fix){
+                var obj = transVal[$(this).attr('class').split(' ')[2]]
+                if(obj){
+                    var s = ' '
+                    for (var v in obj){
+                        if(v.indexOf('translate') >= 0){
+                            s += v + '('+ (obj[v].val - 80  + now * 80) + obj[v].un +') '
+                        }else{
+                            s += v + '('+obj[v].val+ obj[v].un +') '
+                        }
+                    }
+                    $(this).css({transform:s})
+                }
+            },
+            duration:timer
+        },'linear')
+        setTimeout(function(){
+            hiding = false
+            setTimeout(function(){clickFun(undefined,true)},timer)
+        },timer)
+    }
+
+    function reStart(){
+        start = true
+        sucTimes = 0
+        failTimes = 0
+        timer = 800
+        hideNianshou()
+        setTimeout(showNianshou,timer)
+    }
+
+</script>
+</body>
+</html>
