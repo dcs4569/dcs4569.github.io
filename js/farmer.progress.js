@@ -55,10 +55,10 @@
 
             appendElement(inner,man);
             appendElement(inner,man);
-            let bar = createElementWithClass('div','bar');
+            let bar = createElementWithClass('div','bar red');
             appendElement(inner,bar);
             appendElement(outer,inner);
-            options.that.parent().append(outer);
+            options.that.after(outer);
 
             man.addEventListener('click',function(e){
                 chuizi.style.display = 'block';
@@ -97,9 +97,24 @@
             options.outer = outer;
             options.inner = inner;
             options.flag = flag;
-            options.that.parent().append(outer);
+            options.that.after(outer);
 
             updateFishProgress(options)
+        }
+        
+        function defaultProgress(options){
+            options.width = options.that.parent().width();
+            let outer = createElementWithClass('div','farmer-progress-outer');
+            outer.style.width = options.width + 'px';
+            let inner = createElementWithClass('div','farmer-progress-inner');
+            inner.style.width = '50px';
+            appendElement(inner,createElementWithClass('div','bar red'));
+            appendElement(outer,inner);
+            options.outer = outer;
+            options.inner = inner;
+            options.that.after(outer);
+
+            updateDefaultProgress(options)
         }
 
         function updateProgress(options){
@@ -141,6 +156,25 @@
                 updateFishProgress(options);
             },options.timer);
         }
+        
+        function updateDefaultProgress(options){
+            setTimeout(function(){
+                try {
+                    var val = options.callback();
+                    if(val > 100){
+                        val = 100;
+                        setTimeout(function(){
+                            $(options.outer).remove();
+                        },500);
+                        return;
+                    }
+                    $(options.inner).animate({width:options.width * val/100 + 'px'},options.timer-50);
+                }catch (e) {
+                    console.log(e)
+                }
+                updateDefaultProgress(options);
+            },options.timer);
+        }
 
         function createElementWithClass(eName,eClass){
             let element = document.createElement(eName);
@@ -158,8 +192,11 @@
                     case "fish":
                         fishProgress(param);
                         break;
-                    default:
+                    case "famer":
                         farmerProgress(param);
+                        break;
+                    default:
+                        defaultProgress(param);
                         break;
                 }
             }
