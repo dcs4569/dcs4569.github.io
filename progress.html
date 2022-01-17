@@ -4,25 +4,68 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="https://dcs4569.github.io/js/farmer.progress.js"></script>
 </head>
 <body>
-<div id="demo">
-    <button onclick="add('')">添加默认进度条</button>
-    <button onclick="add('fish')">添加年年有鱼进度条</button>
-    <button onclick="add('farmer')">添加打运营进度条</button>
-</div>
+<textarea id="text" contenteditable="true" style="background: #000;color: #fff;width:100%;height: 500px;">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://dcs4569.github.io/js/farmer.progress.js"></script>
+    </head>
+    <body>
+        <div id="demo">
+            <button onclick="add('')">添加默认进度条</button>
+            <button onclick="add('fish')">添加年年有鱼进度条</button>
+            <button onclick="add('farmer')">添加打运营进度条</button>
+        </div>
+        <script>
+        function add(type){
+            var width = 0;
+            $('#demo').progress({type:type},function(){
+                width ++;
+                if(width < 10){
+                    return 10;
+                }
+                return width;
+            });
+        }
+        </script>
+        </body>
+    </html>
+</textarea>
+<button onclick="tryit()">运行看看</button>
+<div id="iframewrapper" style="width: 100%;height:550px;position: fixed;top:0;display: none;background: #fff;"></div>
 <script>
-    function add(type){
-        var width = 0;
-        $('#demo').progress({type:type},function(){
-            width ++;
-            if(width < 10){
-                return 10;
-            }
-            return width;
+    function tryit(){
+        var ifr = document.createElement("iframe");
+        ifr.style.width = '100%';
+        ifr.style.height = '100%';
+        ifr.setAttribute("frameborder", "0");
+        ifr.setAttribute("id", "iframeResult");
+
+        document.getElementById("iframewrapper").innerHTML = "";
+        var bt = document.createElement('button');
+        bt.innerText = '关闭';
+        bt.style.position = 'fixed';
+        bt.style.top = '10px';
+        bt.style.right = '10px';
+        document.getElementById("iframewrapper").appendChild(bt);
+        bt.addEventListener('click',function(){
+            document.getElementById("iframewrapper").style.display = 'none';
         });
+        document.getElementById("iframewrapper").appendChild(ifr);
+        document.getElementById("iframewrapper").style.display = 'block';
+
+        var ifrwcument = (ifr.contentWindow) ? ifr.contentWindow
+            : (ifr.contentDocument) ? ifr.contentDocument
+                : ifr.contentDocument;
+        ifrwcument.document.open();
+        ifrwcument.document.write(document.getElementById('text').value);
+        ifrwcument.document.close();
     }
 </script>
 </body>
