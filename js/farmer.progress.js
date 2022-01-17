@@ -193,7 +193,8 @@
                     link.href = 'https://dcs4569.github.io/css/farmer.progress.css';
                     link.rel = 'stylesheet';
                     link.type = 'text/css';
-                    document.getElementsByTagName('header').item(0).append()
+                    link.id = 'farmer-progress-css';
+                    document.getElementsByTagName('head').item(0).append(link);
                 }
                 switch (param.type) {
                     case "fish":
