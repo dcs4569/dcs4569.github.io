@@ -1,479 +1,476 @@
+@font-face {
+    font-family: "iconfont";
+    src: url('https://dcs4569.github.io/ttf/iconfont.ttf?t=1642214580743') format('truetype');
+}
 
-        @font-face {
-            font-family: "iconfont";
-            src: url('https://dcs4569.github.io/ttf/iconfont.ttf?t=1642214580743') format('truetype');
-        }
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+*{
+    margin:0;
+    padding:0;
+}
+.farmer-progress-outer{
+    border-bottom:1px solid rgba(76, 85, 95, 0.58);
+    width: calc(100% - 100px);
+    height:55px;
+    margin:10px auto;
 
-        .iconfont {
-            font-family: "iconfont" !important;
-            font-size: 16px;
-            font-style: normal;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        *{
-            margin:0;
-            padding:0;
-        }
-        .farmer-progress-outer{
-            border-bottom:1px solid rgba(76, 85, 95, 0.58);
-            width: calc(100% - 100px);
-            height:55px;
-            margin:10px auto;
+}
+.farmer-progress-inner{
+    width: 123px;
+    height:55px;
+    position: relative;
+}
+.farmer-progress-inner .bar{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 5px;
+    background: #39ff23;
+}
+.farmer-progress-inner .man{
+    position: absolute;
+    width: 20px;
+    height: 50px;
+    right: 48px;
+    perspective: 1200px;
+    perspective-origin: center;
+    transform-style: preserve-3d;
+}
+.farmer-progress-inner .man:hover{
+    cursor: pointer;
+}
+.farmer-progress-inner .man:hover .header{
+    transform: rotateY(0deg);
+}
+.farmer-progress-inner .man .book{
+    width: 10px;
+    height: 50px;
+    position: absolute;
+    top:8px;
+    right: -5px;
+    font-size: 61px;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;
+}
+.farmer-progress-inner .man .desc{
+    width: 40px;
+    height: 12px;
+    position: absolute;
+    top:0px;
+    right: -46px;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;
+}
+.farmer-progress-inner .man .name{
+    width: 50px;
+    height: 20px;
+    position: absolute;
+    bottom:0px;
+    right: 20px;
+    line-height: 20px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border:1px solid #000;
+    border-radius:5px;
+    font-size: 12px;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;
+}
+.farmer-progress-inner .man .name1{
+    display: block;
+    content: '';
+    width: 1px;
+    height: 10px;
+    position: absolute;
+    right:15px;
+    background: black;
+    transform: rotate(70deg);
+    bottom:15px;
+}
 
-        }
-        .farmer-progress-inner{
-            width: 123px;
-            height:55px;
-            position: relative;
-        }
-        .farmer-progress-inner .bar{
-            position: absolute;
-            bottom: 0px;
-            width: 100%;
-            height: 5px;
-            background: #39ff23;
-        }
-        .farmer-progress-inner .man{
-            position: absolute;
-            width: 20px;
-            height: 50px;
-            right: 48px;
-            perspective: 1200px;
-            perspective-origin: center;
-            transform-style: preserve-3d;
-        }
-        .farmer-progress-inner .man:hover{
-            cursor: pointer;
-        }
-        .farmer-progress-inner .man:hover .header{
-            transform: rotateY(0deg);
-        }
-        .farmer-progress-inner .man .book{
-            width: 10px;
-            height: 50px;
-            position: absolute;
-            top:6px;
-            right: -5px;
-            font-size: 61px;
-            -moz-user-select:none;
-            -webkit-user-select:none;
-            user-select:none;
-        }
-        .farmer-progress-inner .man .desc{
-            width: 40px;
-            height: 12px;
-            position: absolute;
-            top:1px;
-            right: -50px;
-            font-size: 12px;
-            line-height: 12px;
-            text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            -moz-user-select:none;
-            -webkit-user-select:none;
-            user-select:none;
-        }
-        .farmer-progress-inner .man .name{
-            width: 50px;
-            height: 20px;
-            position: absolute;
-            bottom:0px;
-            right: 20px;
-            line-height: 20px;
-            text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            border:1px solid #000;
-            border-radius:5px;
-            font-size: 12px;
-            -moz-user-select:none;
-            -webkit-user-select:none;
-            user-select:none;
-        }
-        .farmer-progress-inner .man .name1{
-            display: block;
-            content: '';
-            width: 1px;
-            height: 10px;
-            position: absolute;
-            right:15px;
-            background: black;
-            transform: rotate(70deg);
-            bottom:15px;
-        }
+.farmer-progress-inner .man .name2{
+    display: block;
+    content: '';
+    width: 1px;
+    height: 18px;
+    position: absolute;
+    right:15px;
+    background: black;
+    bottom:4px;
+    transform: rotate(30deg);
+}
 
-        .farmer-progress-inner .man .name2{
-            display: block;
-            content: '';
-            width: 1px;
-            height: 18px;
-            position: absolute;
-            right:15px;
-            background: black;
-            bottom:4px;
-            transform: rotate(30deg);
-        }
+.farmer-progress-inner .man .name3{
+    display: block;
+    content: '';
+    width: 2px;
+    height: 12px;
+    position: absolute;
+    right:20px;
+    background: #ffffff;
+    bottom:6px;
+}
 
-        .farmer-progress-inner .man .name3{
-            display: block;
-            content: '';
-            width: 2px;
-            height: 12px;
-            position: absolute;
-            right:20px;
-            background: #ffffff;
-            bottom:6px;
-        }
+.farmer-progress-inner .man .header{
+    width: 20px;
+    height:20px;
+    border:2px solid #000;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    position: relative;
+    transform: rotateY(60deg);
+}
 
-        .farmer-progress-inner .man .header{
-            width: 20px;
-            height:20px;
-            border:2px solid #000;
-            -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            border-radius: 10px;
-            position: relative;
-            transform: rotateY(60deg);
-        }
+.farmer-progress-inner .line {
+    background: #000000;
+    width: 2px;
+}
 
-        .farmer-progress-inner .line {
-            background: #000000;
-            width: 2px;
-        }
+.farmer-progress-inner .man .header .eye{
+    border:1px solid #000;
+    background: #000;
+    width: 3px;
+    height: 3px;
+    border-radius: 3px;
+    position: absolute;
+    top: 5px;
+}
+.farmer-progress-inner .man .header .right-eye{
+    right:3px;
+}
+.farmer-progress-inner .man .header .left-eye{
+    left:3px;
+}
+.farmer-progress-inner .man .header .mouth{
+    border:1px solid #000;
+    width: 5px;
+    height: 5px;
+    border-radius: 3px;
+    position: absolute;
+    left:calc(50% - 3.5px);
+    bottom:2px;
+}
+.farmer-progress-inner .man .header .mouth:after{
+    content: '';
+    width:7px;
+    height: 4px;
+    border-bottom:1px solid #000;
+    position: absolute;
+    background: #ffffff;
+    top:-1px;
+    left:-1px;
+}
 
-        .farmer-progress-inner .man .header .eye{
-            border:1px solid #000;
-            background: #000;
-            width: 3px;
-            height: 3px;
-            border-radius: 3px;
-            position: absolute;
-            top: 5px;
-        }
-        .farmer-progress-inner .man .header .right-eye{
-            right:3px;
-        }
-        .farmer-progress-inner .man .header .left-eye{
-            left:3px;
-        }
-        .farmer-progress-inner .man .header .mouth{
-            border:1px solid #000;
-            width: 5px;
-            height: 5px;
-            border-radius: 3px;
-            position: absolute;
-            left:calc(50% - 3.5px);
-            bottom:2px;
-        }
-        .farmer-progress-inner .man .header .mouth:after{
-            content: '';
-            width:7px;
-            height: 4px;
-            border-bottom:1px solid #000;
-            position: absolute;
-            background: #ffffff;
-            top:-1px;
-            left:-1px;
-        }
+.farmer-progress-inner .man .body{
+    width:2px;
+    height:20px;
+    top:22px;
+    background: #000;
+    position: absolute;
+    left:calc(50% + 1px);
+    transform: rotate(10deg);
+}
+.farmer-progress-inner .man .body .arm{
 
-        .farmer-progress-inner .man .body{
-            width:2px;
-            height:20px;
-            top:22px;
-            background: #000;
-            position: absolute;
-            left:calc(50% + 1px);
-            transform: rotate(10deg);
-        }
-        .farmer-progress-inner .man .body .arm{
+}
 
-        }
+.farmer-progress-inner .man .body .left-arm{
 
-        .farmer-progress-inner .man .body .left-arm{
+}
 
-        }
+.farmer-progress-inner .man .body .left-arm .one{
+    position: absolute;
+    height: 10px;
+    transform: rotate(40deg);
+    top:5px;
+    left:-3px;
+}
+.farmer-progress-inner .man .body .left-arm .two{
+    position: absolute;
+    height: 20px;
+    transform: rotate(60deg);
+    top:-1px;
+    left:3px;
+}
 
-        .farmer-progress-inner .man .body .left-arm .one{
-            position: absolute;
-            height: 10px;
-            transform: rotate(40deg);
-            top:5px;
-            left:-3px;
-        }
-        .farmer-progress-inner .man .body .left-arm .two{
-            position: absolute;
-            height: 20px;
-            transform: rotate(60deg);
-            top:-1px;
-            left:3px;
-        }
+.farmer-progress-inner .man .body .right-arm{
+    position: absolute;
+    height: 10px;
+    transform: rotate(54deg);
+    top:-2px;
+    left:5px;
+}
+.farmer-progress-inner .man .foot{
+    position: relative;
+    top:17px;
+}
 
-        .farmer-progress-inner .man .body .right-arm{
-            position: absolute;
-            height: 10px;
-            transform: rotate(54deg);
-            top:-2px;
-            left:5px;
-        }
-        .farmer-progress-inner .man .foot{
-            position: relative;
-            top:17px;
-        }
+.farmer-progress-inner .man .foot .left-foot{
 
-        .farmer-progress-inner .man .foot .left-foot{
+}
 
-        }
+.farmer-progress-inner .man .foot .left-one{
+    position: absolute;
+    top:0px;
+    left:8px;
+    transform: rotate(38deg);
+    height:5px;
+    animation: one linear 1s infinite;
+}
 
-        .farmer-progress-inner .man .foot .left-one{
-            position: absolute;
-            top:0px;
-            left:8px;
-            transform: rotate(38deg);
-            height:5px;
-            animation: one linear 1s infinite;
-        }
+.farmer-progress-inner .man .foot .left-two{
+    height:5px;
+    position: absolute;
+    transform: rotate(38deg);
+    left:6px;
+    top:4px;
+    animation: two linear 1s infinite;
+}
 
-        .farmer-progress-inner .man .foot .left-two{
-            height:5px;
-            position: absolute;
-            transform: rotate(38deg);
-            left:6px;
-            top:4px;
-            animation: two linear 1s infinite;
-        }
+.farmer-progress-inner .man .foot .right-one{
+    position: absolute;
+    top:0px;
+    left:8px;
+    transform: rotate(38deg);
+    height:5px;
+    animation: one linear 1s infinite;
+    animation-delay: -0.5s;
+}
 
-        .farmer-progress-inner .man .foot .right-one{
-            position: absolute;
-            top:0px;
-            left:8px;
-            transform: rotate(38deg);
-            height:5px;
-            animation: one linear 1s infinite;
-            animation-delay: -0.5s;
-        }
+.farmer-progress-inner .man .foot .right-two{
+    height:5px;
+    position: absolute;
+    transform: rotate(38deg);
+    left:6px;
+    top:4px;
+    animation: two linear 1s infinite;
+    animation-delay: -0.5s;
+}
 
-        .farmer-progress-inner .man .foot .right-two{
-            height:5px;
-            position: absolute;
-            transform: rotate(38deg);
-            left:6px;
-            top:4px;
-            animation: two linear 1s infinite;
-            animation-delay: -0.5s;
-        }
+@keyframes one {
+    12%{
+        left:9px;
+        transform: rotate(8deg);
+        height:6px;
+    }
+    20%{
+        left:10px;
+        transform: rotate(-18deg);
+        height:8px;
+    }
+    23%{
+        left:11px;
+        transform: rotate(-38deg);
+        height:9px;
+    }
+    40%{
+        top:-2px;
+        left:13px;
+        transform: rotate(-68deg);
+        height:10px;
+    }
+    50%{
+        top:-5px;
+        left:14px;
+        transform: rotate(-98deg);
+        height:12px;
+    }
+    60%{
+        top:-2px;
+        left:13px;
+        transform: rotate(-68deg);
+        height:10px;
+    }
+    77%{
+        left:11px;
+        transform: rotate(-38deg);
+        height:9px;
+    }
+    80%{
+        left:10px;
+        transform: rotate(-18deg);
+        height:8px;
+    }
+    88%{
+        left:9px;
+        transform: rotate(8deg);
+        height:6px;
+    }
+}
 
-        @keyframes one {
-            12%{
-                left:9px;
-                transform: rotate(8deg);
-                height:6px;
-            }
-            20%{
-                left:10px;
-                transform: rotate(-18deg);
-                height:8px;
-            }
-            23%{
-                left:11px;
-                transform: rotate(-38deg);
-                height:9px;
-            }
-            40%{
-                top:-2px;
-                left:13px;
-                transform: rotate(-68deg);
-                height:10px;
-            }
-            50%{
-                top:-5px;
-                left:14px;
-                transform: rotate(-98deg);
-                height:12px;
-            }
-            60%{
-                top:-2px;
-                left:13px;
-                transform: rotate(-68deg);
-                height:10px;
-            }
-            77%{
-                left:11px;
-                transform: rotate(-38deg);
-                height:9px;
-            }
-            80%{
-                left:10px;
-                transform: rotate(-18deg);
-                height:8px;
-            }
-            88%{
-                left:9px;
-                transform: rotate(8deg);
-                height:6px;
-            }
-        }
+@keyframes two {
+    12%{
+        left:8px;
+        transform: rotate(8deg);
+        height:5px;
+        top:5px;
+    }
+    20%{
+        left:12px;
+        transform: rotate(-18deg);
+        height:4px;
+        top:5px;
+    }
+    23%{
+        left:12px;
+        transform: rotate(-18deg);
+        height:4px;
+    }
+    40%{
+        top:3px;
+        left:17px;
+        transform: rotate(0deg);
+        height:8px;
+    }
+    50%{
+        top:1px;
+        left:19px;
+        transform: rotate(0deg);
+        height:8px;
+    }
+    60%{
+        top:3px;
+        left:17px;
+        transform: rotate(0deg);
+        height:8px;
+    }
+    77%{
+        left:12px;
+        transform: rotate(-18deg);
+        height:4px;
+    }
+    80%{
+        left:12px;
+        transform: rotate(-18deg);
+        height:4px;
+        top:5px;
+    }
+    88%{
+        left:8px;
+        transform: rotate(8deg);
+        height:5px;
+        top:5px;
+    }
+}
 
-        @keyframes two {
-            12%{
-                left:8px;
-                transform: rotate(8deg);
-                height:5px;
-                top:5px;
-            }
-            20%{
-                left:12px;
-                transform: rotate(-18deg);
-                height:4px;
-                top:5px;
-            }
-            23%{
-                left:12px;
-                transform: rotate(-18deg);
-                height:4px;
-            }
-            40%{
-                top:3px;
-                left:17px;
-                transform: rotate(0deg);
-                height:8px;
-            }
-            50%{
-                top:1px;
-                left:19px;
-                transform: rotate(0deg);
-                height:8px;
-            }
-            60%{
-                top:3px;
-                left:17px;
-                transform: rotate(0deg);
-                height:8px;
-            }
-            77%{
-                left:12px;
-                transform: rotate(-18deg);
-                height:4px;
-            }
-            80%{
-                left:12px;
-                transform: rotate(-18deg);
-                height:4px;
-                top:5px;
-            }
-            88%{
-                left:8px;
-                transform: rotate(8deg);
-                height:5px;
-                top:5px;
-            }
-        }
+.farmer-progress-chuizi{
+    display: none;
+    width: 5px;
+    height: 20px;
+    border:1px solid red;
+    position: relative;
+    border-radius: 0 0 3px 3px;
+    transform: rotate(30deg);
+    left:-16px;
+    top:-16px;
+    animation: hit linear .3s infinite;
+}
+.farmer-progress-chuizi:after{
+    content: '';
+    width: 15px;
+    height: 5px;
+    border:1px solid red;
+    position: absolute;
+    top:-7px;
+    left:-6.5px;
+    border-radius:3px;
+    display: block;
+}
+.farmer-progress-hitout{
+    display: none;
+    opacity: 0;
+    width: 10px;
+    height: 4px;
+    background: red;
+    position: absolute;
+    transform: rotate(120deg);
+    top:4px;
+    left:-3.5px;
+    animation: hitout .3s infinite;
+}
 
-        .farmer-progress-chuizi{
-            display: none;
-            width: 5px;
-            height: 20px;
-            border:1px solid red;
-            position: relative;
-            border-radius: 0 0 3px 3px;
-            transform: rotate(30deg);
-            left:-16px;
-            top:-21px;
-            animation: hit linear .3s infinite;
-        }
-        .farmer-progress-chuizi:after{
-            content: '';
-            width: 15px;
-            height: 5px;
-            border:1px solid red;
-            position: absolute;
-            top:-7px;
-            left:-6.5px;
-            border-radius:3px;
-            display: block;
-        }
-        .farmer-progress-hitout{
-            display: none;
-            opacity: 0;
-            width: 10px;
-            height: 4px;
-            background: red;
-            position: absolute;
-            transform: rotate(120deg);
-            top:4px;
-            left:-3.5px;
-            animation: hitout .3s infinite;
-        }
+@keyframes hit {
+    80%{
+        transform: rotate(-30deg);
+        left:-30px;
+        top:-18px;
+    }
+    100%{
+        transform: rotate(30deg);
+        left:-12px;
+        top:-16px;
+    }
+}
 
-        @keyframes hit {
-            80%{
-                transform: rotate(0deg);
-                left:-25px;
-                top:-22px;
-            }
-            100%{
-                transform: rotate(30deg);
-                left:-16px;
-                top:-21px;
-            }
-        }
+@keyframes hitout {
+    70%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+        filter:blur(2px);
+    }
+}
 
-        @keyframes hitout {
-            70%{
-                opacity: 0;
-            }
-            100%{
-                opacity: 1;
-                filter:blur(2px);
-            }
-        }
-
-        @keyframes xuanzhuan {
-            0%{
-                transform: rotate(0deg);
-                transform-origin: center center;
-            }
-            50%{
-                transform: rotate(180deg);
-                transform-origin: center center;
-            }
-            100%{
-                transform: rotate(360deg);
-                transform-origin: center center;
-            }
-        }
+@keyframes xuanzhuan {
+    0%{
+        transform: rotate(0deg);
+        transform-origin: center center;
+    }
+    50%{
+        transform: rotate(180deg);
+        transform-origin: center center;
+    }
+    100%{
+        transform: rotate(360deg);
+        transform-origin: center center;
+    }
+}
 
 
-        .farmer-progress-inner .fish{
-            color:red;
-            font-size:44px;
-            animation: xuanzhuan linear 2s infinite;
-            width:50px;
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            position: absolute;
-            right: 0px;
-        }
-        .farmer-progress-inner .red{
-            background: red;
-        }
-        .farmer-progress-inner .flag{
-            color:#000;
-            line-height: 50px;
-            height: 50px;
-            width: calc(100% - 50px);
-            text-align: center;
-            position: absolute;
-            right:50px;
-            color:red;
-            font-family: '楷体';
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-    
+.farmer-progress-inner .fish{
+    color:red;
+    font-size:44px;
+    animation: xuanzhuan linear 2s infinite;
+    width:50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    position: absolute;
+    right: 0px;
+}
+.farmer-progress-inner .red{
+    background: red;
+}
+.farmer-progress-inner .flag{
+    color:#000;
+    line-height: 50px;
+    height: 50px;
+    width: calc(100% - 50px);
+    text-align: center;
+    position: absolute;
+    right:50px;
+    color:red;
+    font-family: '楷体';
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
