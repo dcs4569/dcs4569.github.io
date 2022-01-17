@@ -5,7 +5,8 @@
             words:['正在写','快了快了','马上好','再等下','下周一','明天吧'],
             name:'Troy',
             desc:'策划案',
-            timer:500
+            timer:500,
+            flagText:'年年有大鱼'
         };
         function farmerProgress(options){
             options.width = options.that.parent().width();
@@ -89,7 +90,6 @@
             fish.innerHTML = '&#xe607;';
             appendElement(inner,fish);
             let flag = createElementWithClass('div','flag');
-            options.flagText ='年年有大鱼';
             flag.innerHTML = options.flagText;
             appendElement(inner,flag);
             appendElement(inner,createElementWithClass('div','bar red'));
@@ -188,11 +188,18 @@
         $.fn.extend({
             progress:function(options,callback){
                 var param = $.extend({that:this,callback:callback,type:'fish'},config,options);
+                if(!document.getElementById('farmer-progress-css')){
+                    let link = document.createElement('link');
+                    link.href = 'https://dcs4569.github.io/css/farmer.progress.css';
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    document.getElementsByTagName('header').item(0).append()
+                }
                 switch (param.type) {
                     case "fish":
                         fishProgress(param);
                         break;
-                    case "famer":
+                    case "farmer":
                         farmerProgress(param);
                         break;
                     default:
