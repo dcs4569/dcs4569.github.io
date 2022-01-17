@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://dcs4569.github.io/js/farmer.progress.js"></script>
+</head>
+<body>
+<div id="demo">
+    <button onclick="add('')">添加默认进度条</button>
+    <button onclick="add('fish')">添加年年有鱼进度条</button>
+    <button onclick="add('farmer')">添加打运营进度条</button>
+</div>
+<script>
+    function add(type){
+        var width = 0;
+        $('#demo').progress({type:type},function(){
+            width ++;
+            if(width < 10){
+                return 10;
+            }
+            return width;
+        });
+    }
+</script>
+</body>
+</html>
